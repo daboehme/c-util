@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void test_split_inline()
+void test_split_inline(void)
 {
     const char* teststrings[] = {
         "This is a test string", "This,is,,a,test,string", ",This,is,,a,test,string,", ",", "", NULL
@@ -26,7 +26,7 @@ void test_split_inline()
     }
 }
 
-void test_split_copy()
+void test_split_copy(void)
 {
     const char* teststrings[] = {
         "This is a test string", "This,is,,a,test,string", ",This,is,,a,test,string,", "", NULL
@@ -49,7 +49,7 @@ void test_split_copy()
     }
 }
 
-void test_flatten()
+void test_flatten(void)
 {
     const char* strings[] = { "This", " ", "is", " ", "a", " ", "test", NULL };
 
@@ -70,10 +70,8 @@ void test_flatten()
     printf("Test flatten_d     7: %s\n", strutil_flatten_d(res,  7, strings, ","));
 }
 
-void test_vlenc()
+void test_vlenc(void)
 {
-    puts("*** Test vlenc: ");
-    
     uint64_t inputs[8] = { 0, 1, 127, 128, 0xdeadbeef, 1337, 0xFFFFFFFFFFFFFFFF, 4242 };
 
     for (int i = 0; i < 8; ++i) {
@@ -124,16 +122,55 @@ void test_vlenc()
         printf("pos: %4lu   ", n);
         printf("in: %#19lx   out: %#19lx\n", inputs[i], vldec_u64(buf+n, &n));
     }
-
-    puts("*** Test vlenc done.");
 }
 
 int main(int argc, const char* argv[])
 {
-    /* test_flatten(); */
-    test_split_inline();
-    test_split_copy();
-    test_vlenc();
+    struct testcase {
+        const char* name;
+        void (*func)(void);
+    } const testcases[] = {
+        { "flatten",      &test_flatten      },
+        { "split-copy",   &test_split_copy   },
+        { "split-inline", &test_split_inline },
+        { "vlenc",        &test_vlenc        },
+        
+        { NULL, NULL }
+    };
+
+    const struct testcase* runtests[8] = { NULL };
+    int ntests = 0;
     
+    //
+    // find activated tests
+    //
+
+    for (int i = 1; i < argc && ntests < 8; ++i) {
+        const struct testcase *t = testcases;
+
+        for ( ; t->name && t->func && strcmp(t->name, argv[i]); ++t)
+            ;
+
+        if (t->name)
+            runtests[ntests++] = t;
+        else
+            fprintf(stderr, "test-main: unknown testcase \'%s\'.\n", argv[i]);
+    }
+
+    if (ntests == 0)
+        puts("test-main: no test cases selected.\n");
+    
+    //
+    // run tests
+    //
+
+    for (int i = 0; i < ntests; ++i) {
+        const struct testcase* t = runtests[i];
+        
+        printf("*** Test %s:\n", t->name);
+        (*(t->func))();        
+        printf("*** Test %s done.\n", t->name);
+    }
+
     return 0;
 }
