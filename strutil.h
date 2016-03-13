@@ -6,6 +6,9 @@
 
 #include <stddef.h> /* size_t */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 inline const char*
 strutil_find_first_of(const char* src, const char* chars)
@@ -74,3 +77,7 @@ strutil_split_inline(char* src, char delim, char** next);
 
 char*
 strutil_split_copy(const char* src, char delim, char* dst, const char** next);
+
+#ifdef __cplusplus
+} /* extern "C" */
+#endif

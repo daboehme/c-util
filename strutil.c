@@ -49,7 +49,7 @@ strutil_split_copy(const char* src, char delim, char* dst, const char** next)
     return dst;
 }
 
-
+#if 0
 char*
 strutil_escape(const char* src, const char* chars_to_esc, char esc, char* dst)
 {
@@ -61,7 +61,7 @@ strutil_unescape(const char* src, char esc, char* dst)
 {
 
 }
-
+#endif
 
 extern inline size_t 
 strutil_strnlen(const char* s, size_t n);
