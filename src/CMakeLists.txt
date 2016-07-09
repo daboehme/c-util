@@ -1,9 +1,11 @@
 set(C_UTIL_HEADERS
   strutil.h
-  vlenc.h)
+  vlenc.h
+  unitfmt.h)
 set(C_UTIL_SOURCES
   strutil.c
-  vlenc.c)
+  vlenc.c
+  unitfmt.c)
 
 add_library(c-util ${C_UTIL_SOURCES})
 

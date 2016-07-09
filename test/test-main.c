@@ -27,6 +27,7 @@
 
 #include "strutil.h"
 #include "vlenc.h"
+#include "unitfmt.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -151,6 +152,23 @@ void test_vlenc(void)
     }
 }
 
+void test_unitfmt(void)
+{
+    unsigned int values[] = {
+        0, 0, 1, 2, 500, 1023,
+        1024, 1025, 1500, 25000, 32768, 1024*1024-1,
+        1024*1024, 1024*1024+512*1024,
+        1024*1024*1024+128*1024*1024,
+        0
+    };
+    
+    for (unsigned int* p = values+1; *p >= *(p-1); ++p) {
+        unitfmt_result res = unitfmt(*p, unitfmt_bytes);
+
+        printf("%10u: %g %s\n", *p, res.val, res.symbol);
+    }
+}
+
 int main(int argc, const char* argv[])
 {
     struct testcase {
@@ -161,6 +179,7 @@ int main(int argc, const char* argv[])
         { "split-copy",   &test_split_copy   },
         { "split-inline", &test_split_inline },
         { "vlenc",        &test_vlenc        },
+        { "unitfmt",      &test_unitfmt      },
         
         { NULL, NULL }
     };
