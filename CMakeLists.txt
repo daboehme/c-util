@@ -5,6 +5,8 @@
 project (c-util C CXX)
 cmake_minimum_required(VERSION 3.0)
 
+set(C_UTIL_VERSION "1.1")
+
 #
 # Set C99 Flags
 #
@@ -21,7 +23,7 @@ endif()
 # Subdirectories
 #
 
+add_subdirectory(doc)
 add_subdirectory(src)
 add_subdirectory(test)
-
 
