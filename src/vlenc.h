@@ -31,8 +31,8 @@
  *  This module contains functions to pack and unpack integer values
  *  using variable-length encoding. Variable-length encoding reduces the
  *  amount of bytes required to store small-to-medium values. Values
- *  smaller than 127 take up only one byte. However, for very large
- *  values, an extra byte may be consumed.
+ *  smaller than 128 take up only one byte. However, for very large
+ *  values, a few extra bytes may be consumed.
  *
  *  Encoding:
  *
@@ -97,7 +97,7 @@ vlenc_u64(uint64_t val, unsigned char* buf)
 /*! \brief Read variable-length encoded 64-bit value from \a buf.
  *
  * The function reads a variable-length encoded 64-bit unsigned integer value
- * from \a buffer and increments \a inc by the number of bytes read.
+ * from \a buf and increments \a inc by the number of bytes read.
  *
  * \param  buf  Buffer to read from.
  * \param  inc  The function increments this value by the number of bytes read.

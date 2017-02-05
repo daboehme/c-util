@@ -37,6 +37,8 @@
 extern "C" {
 #endif
 
+/*! \brief Find the first occurance of any of the characters in \a chars in string \a src.
+ */
 inline const char*
 strutil_find_first_of(const char* src, const char* chars)
 {
