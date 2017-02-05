@@ -54,7 +54,7 @@ strutil_find_first_of(const char* src, const char* chars)
  *
  * The strutil_strnlen() function returns the length of the string given in 
  * s, excluding the terminating null byte, if the string length is less
- * or equal than n. Otherwise, the function returns \param n.
+ * or equal than n. Otherwise, the function returns \a n.
  *
  * This function is thread-safe and signal-safe.
  */
@@ -93,13 +93,13 @@ strutil_flatten_n(char* dst, size_t dst_len, size_t num_src, const char* src[])
     return strutil_flatten_nd(dst, dst_len, num_src, src, NULL);
 }
 
-/*! \brief Split a string in-line by replacing \param delim with '\0'
+/*! \brief Split a string in-line by replacing \a delim with '\0'
  */
 
 char*
 strutil_split_inline(char* src, char delim, char** next);
 
-/*! \brief Split a string by replacing \param delim with '\0'
+/*! \brief Split a string by replacing \a delim with '\0'
  */
 
 char*

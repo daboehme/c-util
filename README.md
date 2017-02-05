@@ -15,3 +15,4 @@ String utilities: `flatten`, `split`, `find_first_of`, and `strnlen`.
 
 Integer variable-length de/encoding: `vlenc_u64`, `vldec_u64`.
 
+Unit conversion and formatting: `unitfmt`
