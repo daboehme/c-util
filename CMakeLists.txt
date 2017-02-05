@@ -5,6 +5,8 @@
 project (c-util C CXX)
 cmake_minimum_required(VERSION 3.0)
 
+include(GNUInstallDirs)
+
 set(C_UTIL_VERSION "1.1")
 
 #
