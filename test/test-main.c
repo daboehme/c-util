@@ -131,8 +131,8 @@ void test_vlenc(void)
                bytes.bytes[4], bytes.bytes[5], bytes.bytes[6], bytes.bytes[7]);
     }
 
-    unsigned char buf[128]   = { 0 };
-    unsigned char*  p        = buf;
+    unsigned char  buf[128];
+    unsigned char* p = buf;
 
     for (int i = 0; i < 8; ++i)
         p += vlenc_u64(inputs[i], p);
